@@ -2,106 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TEAM MADS | CALL ME UNK0WN 120911</title>
+  <title>TEAM MADS Terminal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <!-- External CSS -->
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #000;
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00ff00;
+    }
+
+    .terminal {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      padding: 30px;
+      background: radial-gradient(ellipse at center, #000 0%, #020202 100%);
+      overflow: hidden;
+    }
+
+    .terminal-line {
+      font-size: 1.2rem;
+      margin: 5px 0;
+      white-space: pre-wrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      background: #00ff00;
+      width: 10px;
+      height: 18px;
+      animation: blink 0.7s infinite;
+      vertical-align: bottom;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <canvas id="matrix"></canvas>
-  <div class="content">
-    <div class="typing" id="typingText"></div>
-    <div class="links">
-      <a href="tools.html"><i class="fas fa-tools"></i> ALL TOOLS</a>
-      <a href="https://www.facebook.com/tripleAfanclub" target="_blank"><i class="fab fa-facebook"></i> Facebook Account</a>
-      <a href="https://www.facebook.com/tripleAfanclub" target="_blank"><i class="fas fa-flag"></i> Facebook Page</a>
-      <a href="https://github.com/XD-MADS-12" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-      <a href="https://t.me/@Anon_Lucifer44" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-    </div>
-  </div>
+  <div class="terminal" id="terminal"></div>
 
-  <script>
-    // MATRIX ANIMATION
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    let matrix = "01";
-    matrix = matrix.split("");
-    let font_size = 16;
-    let columns = canvas.width / font_size;
-    let drops = [];
-    for (let x = 0; x < columns; x++) drops[x] = 1;
-
-    function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#00ffcc";
-      ctx.font = font_size + "px Courier";
-      for (let i = 0; i < drops.length; i++) {
-        let text = matrix[Math.floor(Math.random() * matrix.length)];
-        ctx.fillText(text, i * font_size, drops[i] * font_size);
-
-        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    setInterval(draw, 33);
-    window.onresize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    // TYPING ANIMATION
-    const lines = [
-      "TEAM MADS",
-      "Auto Exploit Kit",
-      "IP Tracker",
-      "Facebook Cracker",
-      "Fake Login Page Generator",
-      "Terminal Toolkit",
-      "Join the Revolution"
-    ];
-
-    let lineIndex = 0;
-    let charIndex = 0;
-    let typingSpeed = 70;
-    let deleting = false;
-    const typingText = document.getElementById("typingText");
-
-    function typeAnimation() {
-      if (lineIndex < lines.length) {
-        if (!deleting && charIndex <= lines[lineIndex].length) {
-          typingText.innerHTML = lines[lineIndex].substring(0, charIndex) + "_";
-          charIndex++;
-          setTimeout(typeAnimation, typingSpeed);
-        } else if (charIndex > lines[lineIndex].length) {
-          deleting = true;
-          setTimeout(typeAnimation, 700);
-        } else if (deleting && charIndex > 0) {
-          typingText.innerHTML = lines[lineIndex].substring(0, charIndex) + "_";
-          charIndex--;
-          setTimeout(typeAnimation, typingSpeed / 2);
-        } else {
-          deleting = false;
-          lineIndex++;
-          setTimeout(typeAnimation, 500);
-        }
-      } else {
-        lineIndex = 0;
-        charIndex = 0;
-        setTimeout(typeAnimation, 1000);
-      }
-    }
-
-    typeAnimation();
-  </script>
+  <script src="terminal.js"></script>
 </body>
 </html>
