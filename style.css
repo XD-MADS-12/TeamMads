@@ -1,86 +1,55 @@
-/* Reset */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: monospace;
+  background-color: black;
+  color: #00ff00;
+  overflow-x: hidden;
 }
 
-/* Matrix Background */
 canvas#matrix {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
-  background: black;
+  z-index: 0;
 }
 
-/* Terminal Container */
-.terminal-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 800px;
-  height: 80vh;
-  background: rgba(0, 0, 0, 0.75);
-  border: 2px solid #00ffcc;
-  box-shadow: 0 0 20px #00ffcc;
-  border-radius: 8px;
+.terminal {
+  position: relative;
+  z-index: 1;
   padding: 20px;
-  font-family: 'Courier New', Courier, monospace;
-  color: #00ffcc;
-  overflow: hidden;
+  max-width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.prompt {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.input-line {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
-/* Terminal Output */
-.terminal-output {
-  flex: 1;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  font-size: 14px;
-  line-height: 1.4;
-  margin-bottom: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: #00ffcc transparent;
-}
-
-.terminal-output::-webkit-scrollbar {
-  width: 6px;
-}
-.terminal-output::-webkit-scrollbar-thumb {
-  background-color: #00ffcc;
-  border-radius: 3px;
-}
-
-/* Terminal Input */
-#terminalInput {
-  width: 100%;
+.input-line input {
   background: transparent;
   border: none;
-  border-top: 1px solid #00ffcc;
-  padding: 10px;
-  color: #00ffcc;
+  color: #00ff00;
+  font-family: monospace;
   font-size: 16px;
   outline: none;
+  flex: 1;
 }
 
-/* Placeholder Color */
-#terminalInput::placeholder {
-  color: #00ffaa77;
+.result {
+  white-space: pre-wrap;
+  color: #00ffcc;
+  margin: 5px 0 10px 20px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .terminal-container {
-    height: 90vh;
-    padding: 10px;
-  }
-
-  #terminalInput {
-    font-size: 14px;
-  }
+.error {
+  color: red;
 }
