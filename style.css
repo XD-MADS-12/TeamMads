@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #000000, #0a0a0a);
+  color: #00ffcc;
+  font-family: 'Courier New', Courier, monospace;
+  overflow-x: hidden;
+  animation: glitchBackground 4s infinite;
+}
+
+@keyframes glitchBackground {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 10px 0;
+  }
+  50% {
+    background-position: -10px 0;
+  }
+  75% {
+    background-position: 0 10px;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.terminal {
+  width: 90%;
+  max-width: 800px;
+  background: #111;
+  padding: 20px;
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 15px #00ffcc;
+}
+
+input, textarea {
+  background: black;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+}
+
+button {
+  background: black;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #00ffcc;
+  color: black;
+}
+
+a {
+  color: #00ffcc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  }
