@@ -2,18 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TEAM MADS - Tools</title>
-  <link rel="stylesheet" href="style.css">
+  <title>TEAM MADS | Terminal Tools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="terminal.css">
 </head>
 <body>
-  <div class="terminal">
-    <h2>🔧 TEAM MADS - Tools</h2>
-    <ul>
-      <li><a href="https://ipinfo.io" target="_blank">IP Tracker</a></li>
-      <li><a href="https://passwordsgenerator.net/" target="_blank">Password Generator</a></li>
-      <li><a href="https://whois.domaintools.com/" target="_blank">WHOIS Lookup</a></li>
-      <li><a href="index.html">← Back to Terminal</a></li>
-    </ul>
+  <div class="terminal-container">
+    <div id="terminal-output"></div>
+    <div class="terminal-input">
+      <span>&gt;</span>
+      <input type="text" id="commandInput" autofocus autocomplete="off" placeholder="Type your command...">
+    </div>
   </div>
+
+  <script>
+    const input = document.getElementById("commandInput");
+    const output = document.getElementById("terminal-output");
+
+    const commands = {
+      help: "Available commands: help, iplookup [IP], whois [domain], clear",
+      clear: "Terminal cleared.",
+      "iplookup 8.8.8.8": "IP: 8.8.8.8\nLocation: California, USA\nISP: Google LLC",
+      "whois example.com": "Domain: example.com\nRegistrar: IANA\nStatus: Active"
+    };
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const cmd = input.value.trim();
+        output.innerHTML += `<div><span>&gt;</span> ${cmd}</div>`;
+        if (cmd === "clear") {
+          output.innerHTML = "";
+        } else if (commands[cmd]) {
+          output.innerHTML += `<div class="response">${commands[cmd].replace(/\n/g, "<br>")}</div>`;
+        } else {
+          output.innerHTML += `<div class="error">Command not found. Type 'help'</div>`;
+        }
+        input.value = "";
+        output.scrollTop = output.scrollHeight;
+      }
+    });
+  </script>
 </body>
 </html>
