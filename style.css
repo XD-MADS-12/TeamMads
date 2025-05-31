@@ -1,64 +1,68 @@
-body {
+/* style.css */
+html, body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(120deg, #000000, #0a0a0a);
+  height: 100%;
+  background: #000;
   color: #00ffcc;
   font-family: 'Courier New', Courier, monospace;
-  overflow-x: hidden;
-  animation: glitchBackground 4s infinite;
+  overflow: hidden;
 }
 
-@keyframes glitchBackground {
-  0% {
-    background-position: 0 0;
-  }
-  25% {
-    background-position: 10px 0;
-  }
-  50% {
-    background-position: -10px 0;
-  }
-  75% {
-    background-position: 0 10px;
-  }
-  100% {
-    background-position: 0 0;
-  }
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
-.terminal {
-  width: 90%;
-  max-width: 800px;
-  background: #111;
+.content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   padding: 20px;
-  border: 2px solid #00ffcc;
-  box-shadow: 0 0 15px #00ffcc;
 }
 
-input, textarea {
-  background: black;
-  color: #00ffcc;
-  border: 1px solid #00ffcc;
+.typing {
+  font-size: 1.6rem;
+  text-shadow: 0 0 10px #00ffcc;
+  margin-bottom: 30px;
+  white-space: pre;
+  min-height: 40px;
 }
 
-button {
-  background: black;
-  color: #00ffcc;
-  border: 1px solid #00ffcc;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-button:hover {
-  background: #00ffcc;
-  color: black;
-}
-
-a {
+.links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 1.1rem;
   color: #00ffcc;
   text-decoration: none;
+  background-color: rgba(0, 255, 204, 0.1);
+  border: 1px solid #00ffcc;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
-a:hover {
-  text-decoration: underline;
+.links a:hover {
+  background-color: #00ffcc;
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .typing {
+    font-size: 1.2rem;
   }
+
+  .links a {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
