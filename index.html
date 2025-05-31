@@ -2,39 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TEAM MADS |Unkn0wnTerminal</title>
+  <title>TEAM MADS | Terminal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <!-- External CSS -->
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- Matrix Background -->
   <canvas id="matrix"></canvas>
-
-  <!-- Terminal Typing Effect -->
-  <div class="terminal-overlay">
-    <div class="typing" id="typingText"></div>
-    <div class="terminal-links">
-      <a href="tools.html"><i class="fas fa-tools"></i> ALL TOOLS</a>
-      <a href="https://www.facebook.com/Mr.AHS12" target="_blank"><i class="fab fa-facebook"></i> Facebook Account</a>
-      <a href="https://www.facebook.com/tripleAfanclub" target="_blank"><i class="fas fa-flag"></i> Facebook Page</a>
-      <a href="https://github.com/XD-MADS-12" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-      <a href="https://t.me/@Anon_Lucifer44" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+  <div class="terminal">
+    <div id="output"></div>
+    <div class="input-line">
+      <span class="prompt">TEAM-MADS ~#</span>
+      <input type="text" id="cmdInput" autocomplete="off" autofocus>
     </div>
   </div>
 
-  <!-- Matrix Animation Script -->
   <script>
+    // MATRIX ANIMATION
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-
     let matrix = "01";
     matrix = matrix.split("");
-    let font_size = 16;
+    let font_size = 14;
     let columns = canvas.width / font_size;
     let drops = [];
     for (let x = 0; x < columns; x++) drops[x] = 1;
@@ -42,16 +33,12 @@
     function draw() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#00ffcc";
-      ctx.font = font_size + "px Courier";
+      ctx.fillStyle = "#0f0";
+      ctx.font = font_size + "px monospace";
       for (let i = 0; i < drops.length; i++) {
         let text = matrix[Math.floor(Math.random() * matrix.length)];
         ctx.fillText(text, i * font_size, drops[i] * font_size);
-
-        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
+        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
       }
     }
@@ -61,51 +48,38 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-  </script>
 
-  <!-- Typing Animation Script -->
-  <script>
-    const lines = [
-      "Initializing TEAM MADS...",
-      "Injecting Auto Exploit Kit...",
-      "Loading IP Tracker...",
-      "Facebook Cracker Online...",
-      "Fake Login Generator Ready...",
-      "Access Granted >> Enter Tools"
-    ];
+    // TERMINAL INPUT
+    const input = document.getElementById("cmdInput");
+    const output = document.getElementById("output");
 
-    let lineIndex = 0;
-    let charIndex = 0;
-    let typingSpeed = 70;
-    let deleting = false;
-    const typingText = document.getElementById("typingText");
-
-    function typeAnimation() {
-      if (lineIndex < lines.length) {
-        if (!deleting && charIndex <= lines[lineIndex].length) {
-          typingText.innerHTML = lines[lineIndex].substring(0, charIndex) + "_";
-          charIndex++;
-          setTimeout(typeAnimation, typingSpeed);
-        } else if (charIndex > lines[lineIndex].length) {
-          deleting = true;
-          setTimeout(typeAnimation, 1000);
-        } else if (deleting && charIndex > 0) {
-          typingText.innerHTML = lines[lineIndex].substring(0, charIndex) + "_";
-          charIndex--;
-          setTimeout(typeAnimation, typingSpeed / 2);
-        } else {
-          deleting = false;
-          lineIndex++;
-          setTimeout(typeAnimation, 500);
-        }
-      } else {
-        lineIndex = 0;
-        charIndex = 0;
-        setTimeout(typeAnimation, 1000);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const command = input.value.trim();
+        if (command === "") return;
+        output.innerHTML += `<div><span class="prompt">TEAM-MADS ~#</span> ${command}</div>`;
+        fetch("execute.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `input=${encodeURIComponent(command)}`
+        })
+          .then(res => res.json())
+          .then(data => {
+            output.innerHTML += `<div class="result">${data.response}</div>`;
+            window.scrollTo(0, document.body.scrollHeight);
+          })
+          .catch(() => {
+            output.innerHTML += `<div class="result error">❌ Error processing command.</div>`;
+          });
+        input.value = "";
       }
-    }
-
-    typeAnimation();
+    });
   </script>
+  <div class="terminal">
+      <a href="https://www.facebook.com/Mr.AHS12" target="_blank"><i class="fab fa-facebook"></i> Facebook Account</a>
+      <a href="https://www.facebook.com/tripleAfanclub" target="_blank"><i class="fas fa-flag"></i> Facebook Page</a>
+      <a href="https://github.com/XD-MADS-12" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="https://t.me/@Anon_Lucifer44" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+    </div>
 </body>
 </html>
