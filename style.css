@@ -1,57 +1,86 @@
-body, html {
+/* Reset */
+* {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background-color: #000;
-  font-family: 'Courier New', Courier, monospace;
-  color: #00ffcc;
+  box-sizing: border-box;
 }
 
+/* Matrix Background */
 canvas#matrix {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: -1;
+  background: black;
 }
 
-.terminal-overlay {
+/* Terminal Container */
+.terminal-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  height: 80vh;
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 20px #00ffcc;
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ffcc;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.3);
+  justify-content: space-between;
 }
 
-.typing {
-  font-size: 24px;
+/* Terminal Output */
+.terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #00ffcc transparent;
+}
+
+.terminal-output::-webkit-scrollbar {
+  width: 6px;
+}
+.terminal-output::-webkit-scrollbar-thumb {
+  background-color: #00ffcc;
+  border-radius: 3px;
+}
+
+/* Terminal Input */
+#terminalInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-top: 1px solid #00ffcc;
+  padding: 10px;
   color: #00ffcc;
-  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
-  margin-bottom: 30px;
-  min-height: 30px;
+  font-size: 16px;
+  outline: none;
 }
 
-.terminal-links a {
-  display: block;
-  margin: 10px;
-  font-size: 18px;
-  color: #00ffee;
-  text-decoration: none;
-  transition: 0.3s;
+/* Placeholder Color */
+#terminalInput::placeholder {
+  color: #00ffaa77;
 }
 
-.terminal-links a i {
-  margin-right: 10px;
-}
+/* Responsive */
+@media (max-width: 600px) {
+  .terminal-container {
+    height: 90vh;
+    padding: 10px;
+  }
 
-.terminal-links a:hover {
-  color: #fff;
-  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+  #terminalInput {
+    font-size: 14px;
+  }
 }
