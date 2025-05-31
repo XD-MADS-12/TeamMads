@@ -1,68 +1,57 @@
-/* style.css */
-html, body {
+body, html {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background: #000;
-  color: #00ffcc;
-  font-family: 'Courier New', Courier, monospace;
   overflow: hidden;
+  background-color: #000;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ffcc;
 }
 
-canvas {
+canvas#matrix {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 0;
 }
 
-.content {
-  position: relative;
+.terminal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 1;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
   padding: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .typing {
-  font-size: 1.6rem;
-  text-shadow: 0 0 10px #00ffcc;
-  margin-bottom: 30px;
-  white-space: pre;
-  min-height: 40px;
-}
-
-.links a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0;
-  padding: 10px 20px;
-  font-size: 1.1rem;
+  font-size: 24px;
   color: #00ffcc;
+  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+  margin-bottom: 30px;
+  min-height: 30px;
+}
+
+.terminal-links a {
+  display: block;
+  margin: 10px;
+  font-size: 18px;
+  color: #00ffee;
   text-decoration: none;
-  background-color: rgba(0, 255, 204, 0.1);
-  border: 1px solid #00ffcc;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
-.links a:hover {
-  background-color: #00ffcc;
-  color: #000;
+.terminal-links a i {
+  margin-right: 10px;
 }
 
-@media (max-width: 600px) {
-  .typing {
-    font-size: 1.2rem;
-  }
-
-  .links a {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
+.terminal-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
 }
